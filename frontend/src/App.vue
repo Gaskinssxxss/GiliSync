@@ -1,15 +1,16 @@
 <template>
-  <NavigationComp/>
-  <router-view/>
+  <div>
+  </div>
+  <router-view />
 </template>
 
 <script>
 
-import NavigationComp from "@/components/NavigationComp";
-
 export default {
   name: "App",
-  components: {NavigationComp}
+  components: {
+
+  }
 }
 </script>
 

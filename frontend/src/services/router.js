@@ -1,10 +1,10 @@
-import {createRouter, createWebHistory} from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "@/views/HomeView";
-import DragonsView from "@/views/DragonsView";
 import LoginView from "@/views/LoginView";
 import RegisterView from "@/views/RegisterView";
 import store from "@/services/store";
 import UserView from "@/views/UserView";
+import product from "@/views/productViews";
 
 const routes = [
     {
@@ -16,16 +16,6 @@ const routes = [
             authRequired: false,
             authForbidden: false
         }
-    },
-    {
-        path: "/dragons",
-        name: "dragons",
-        component: DragonsView,
-        meta: {
-            title: "Dragons",
-            authRequired: true,
-            authForbidden: false
-        },
     },
     {
         path: "/login",
@@ -56,7 +46,18 @@ const routes = [
             authRequired: true,
             authForbidden: false
         }
+    },
+    {
+        path: "/product",
+        name: "product",
+        component: product,
+        meta: {
+            title: "product",
+            authRequired: false,
+            authForbidden: false
+        }
     }
+
 ]
 
 const router = createRouter({
@@ -74,9 +75,9 @@ router.beforeEach(async (to, from, next) => {
     // control routes
     const isAuthenticated = store.state.userLoggedIn;
     if (!isAuthenticated && to.meta.authRequired) {
-        next({name: "login"});
+        next({ name: "login" });
     } else if (isAuthenticated && to.meta.authForbidden) {
-        next({name: "user"});
+        next({ name: "user" });
     } else {
         next();
     }

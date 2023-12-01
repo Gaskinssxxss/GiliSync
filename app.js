@@ -9,18 +9,18 @@ const app = express();
 
 // middleware
 if (process.env.NODE_ENV === "development") {
-    app.use(cors({origin: "http://localhost:8080", credentials: true}));
+    app.use(cors({ origin: "http://localhost:8081", credentials: true }));
 } else {
     app.use(cors());
 }
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // connect db
-mongoose.connect(process.env.DB_URI, {useNewUrlParser: true, useUnifiedTopology: true})
-    .then(() => console.log("INFO - MongoDB connected successfully."))
+mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log("server has skankin!!!"))
     .catch((err) => console.log(`ERROR - MongoDB not connected : ${err} `));
 
 // register api routes
@@ -35,7 +35,7 @@ app.get("*", (req, res) => {
 });
 
 // run server
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 5000
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}`)
 });

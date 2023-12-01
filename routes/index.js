@@ -1,14 +1,14 @@
-const {Router} = require("express");
+const { Router } = require("express");
 const User = require("../model/user");
+const Product = require("../model/product")
 const jwt = require("jsonwebtoken");
-const {SECRET, MAX_AGE} = require("../consts")
-const Dragon = require("../model/dragon");
-const {requireLogin} = require("../middleware/authentication");
+const { SECRET, MAX_AGE } = require("../consts")
+const { requireLogin } = require("../middleware/authentication");
 
 const router = Router();
 
 const createJwt = (payload) => {
-    return jwt.sign({payload}, SECRET, {expiresIn: MAX_AGE});
+    return jwt.sign({ payload }, SECRET, { expiresIn: MAX_AGE });
 }
 
 /**
@@ -17,14 +17,14 @@ const createJwt = (payload) => {
  * @access Private
  */
 router.post("/users/register", (req, res) => {
-    const {username, email, password} = req.body;
-    User.create({username, email, password})
+    const { username, email, password } = req.body;
+    User.create({ username, email, password })
         .then(() => {
-            return res.status(200).json({message: "success"})
+            return res.status(200).json({ message: "success" })
         })
         .catch(error => {
             console.log(error);
-            return res.status(400).json({message: "failed", error})
+            return res.status(400).json({ message: "failed", error })
         });
 });
 
@@ -34,22 +34,21 @@ router.post("/users/register", (req, res) => {
  * @access Public
  */
 router.post("/users/login", (req, res) => {
-    const {email, password} = req.body;
-    User.findOne({email: email, password: password})
+    const { email, password } = req.body;
+    User.findOne({ email: email, password: password })
         .then(user => {
             if (!user) {
-                return res.status(401).json({message: "failed", error: "wrong-credentials"});
+                return res.status(401).json({ message: "failed", error: "wrong-credentials" });
             }
             const maxAge = 3 * 24 * 60 * 60
             const token = createJwt(user._id, maxAge);
-            res.cookie("auth", token, {httpOnly: true, maxAge: maxAge * 10});
-            return res.status(200).json({message: "success", data: user})
+            res.cookie("auth", token, { httpOnly: true, maxAge: maxAge * 10 });
+            return res.status(200).json({ message: "success", data: user })
         })
         .catch(err => {
-            return res.status(400).json({message: "failed", err})
+            return res.status(400).json({ message: "failed", err })
         });
 });
-
 
 /**
  * @route POST api/users/logout
@@ -58,7 +57,7 @@ router.post("/users/login", (req, res) => {
  */
 router.post("/users/logout", (req, res) => {
     res.clearCookie("auth");
-    return res.status(200).json({message: "success"})
+    return res.status(200).json({ message: "success" })
 });
 
 /**
@@ -69,30 +68,40 @@ router.post("/users/logout", (req, res) => {
 router.get("/users", requireLogin, (req, res) => {
     const token = req.cookies.auth;
     const _id = jwt.verify(token, SECRET).payload;
-    User.findOne({_id}, {username: 1, email: 1, registrationDate: 1})
+    User.findOne({ _id }, { username: 1, email: 1, registrationDate: 1 })
         .then(user => {
-            return res.status(200).json({message: "success", data: user})
+            return res.status(200).json({ message: "success", data: user })
         })
         .catch((err) => {
             console.log(err);
-            return res.status(401).json({message: "error", code: "unauthenticated-access"});
+            return res.status(401).json({ message: "error", code: "unauthenticated-access" });
         })
 });
 
 /**
- * @route GET api/dragons
- * @desc Get dragons
+ * @route GET api/users
+ * @desc Get authenticated user
  * @access Private
  */
-router.get("/dragons", requireLogin, (req, res) => {
-    Dragon.find()
-        .then(dragons => {
-            return res.status(200).json({message: "success", data: dragons})
+router.get("/product", (req, res) => {
+    Product.find()
+        .then((productList) => {
+            const formattedData = productList.map((product) => {
+                return {
+                    id: product.id,
+                    name: product.name,
+                    image: product.image,
+                    deskripsi: product.deskripsi,
+                    price: product.price
+                };
+            });
+
+            return res.status(200).json({ message: "success", data: formattedData });
         })
-        .catch(error => {
-            console.log(error);
-            return res.status(400).json({message: "error", error})
-        })
+        .catch((err) => {
+            console.log(err);
+            return res.status(500).json({ message: "error", error: "internal-server-error" });
+        });
 });
 
 module.exports = router;

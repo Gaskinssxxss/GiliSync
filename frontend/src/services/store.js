@@ -1,11 +1,12 @@
-import {createStore} from "vuex";
+import { createStore } from "vuex";
 import Api from "@/services/api";
 
 const store = createStore({
     state: {
         user: null,
         userLoggedIn: false,
-        isStoreUpdated: false
+        isStoreUpdated: false,
+        productList: [],
     },
     mutations: {
         setUser(state, payload) {
@@ -16,11 +17,14 @@ const store = createStore({
         },
         setIsStoreUpdated(state, payload) {
             state.isStoreUpdated = payload;
-        }
+        },
+        setProductList(state, payload) {
+            state.productList = payload;
+        },
     },
     actions: {
-        async login(context, {email, password}) {
-            const res = await Api.post("/users/login", {email, password})
+        async login(context, { email, password }) {
+            const res = await Api.post("/users/login", { email, password })
                 .catch((err) => {
                     throw new Error(err);
                 });
@@ -43,6 +47,15 @@ const store = createStore({
                 context.commit("setUserIsLoggedIn", false);
             } finally {
                 context.commit("setIsStoreUpdated", true);
+            }
+        },
+        async productData(context) {
+            try {
+                const res = await Api.get("/product");
+                context.commit("setProductList", res.data.data);
+            } catch (error) {
+                console.error('Error fetching kursi data in action:', error);
+                throw error;
             }
         },
         async logout(context) {
