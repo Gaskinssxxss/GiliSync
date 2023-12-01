@@ -4,7 +4,7 @@
             <div class="pb-28">
                 <navCompt class="bg-orange-50"></navCompt>
             </div>
-            <div class="mr-56">
+            <div class="mr-56 pb-10">
                 <div class="flex items-center justify-end">
                     <div class="">
                         <searchCompt>
