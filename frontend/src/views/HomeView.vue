@@ -1,21 +1,34 @@
+<script setup>
+import { AutoTyperVue } from "auto-typer-vue3";
+
+let text = 'HELLO';
+let text2 = 'GILI'
+
+let text3 = ['Special offers - Get % for many package!', 'Selami lautan, tungganggi ombak mu!!!', 'c-mon, joinmwith us in the love land']
+</script>
+
 <template>
-  <div class="bg-orange-50">
+  <div class="">
     <div class="">
-      <navCompt class="bg-orange-50"></navCompt>
+      <navCompt class="bg-white"></navCompt>
       <div>
-        <div class="flex justify-center pt-28">
-          <img src="../../public/1.jpg" alt="banner"
-            class="w-full sm:w-auto md:w-auto lg:w-auto xl:w-auto 2xl:w-auto rounded-b-7xl">
+        <div class=" mt-20 md:-mt-52">
+          <img src="../../public/banner.jpg" alt="banner" class=" h-56 md:h-full w-full rounded-b-4xl md:rounded-b-7xl">
         </div>
-        <div class="px-20 -mt-16 relative">
-          <div class="px-20">
-            <div class="bg-cyan-700 bg-opacity-70 rounded-2xl shadow-md">
-              <div class="bg-orange-50 py-2 rounded-t-2xl">
-                <h1 class="text-center text-cyan-800">
-                  Special offers - Get % for many package!
+        <div
+          class=" text-cyan-600 text-4xl lg:text-8xl font-extrabold font-sans text-center relative -top-36 lg:-top-52 xl:-top-96">
+          <AutoTyperVue componentTag="h1" :text="text" :typingDelay=700 />
+          <AutoTyperVue componentTag="h1" :text="text2" :typingDelay=900 />
+        </div>
+        <div class="px-1 sm:px-5 md:px-10 lg:px-40 -mt-28 lg:-mt-40 xl:-mt-64 relative">
+          <div class="px-4 md:px-10 lg:px-20">
+            <div class=" bg-opacity-90 rounded-2xl shadow-md border-1 border-cyan-800 bg-white">
+              <div class=" bg-cyan-600 py-1 md:py-2 rounded-t-2xl">
+                <h1 class="text-center text-xs md:text-base text-orange-50">
+                  <AutoTyperVue componentTag="h3" :text="text3"></AutoTyperVue>
                 </h1>
               </div>
-              <div class="px-10 py-10">
+              <div class="px-5 md:px-10 py-4 md:py-10">
                 <div>
                   <specialOffers></specialOffers>
                 </div>
@@ -24,25 +37,27 @@
           </div>
         </div>
       </div>
-      <!-- <div class="px-14 sm:px-20 md:px-36 lg:px-40 xl:px-56">
-        <div class="relative -bottom-80 sm:bottom-90 md:-bottom-93 lg:-bottom-98 xl:-bottom-105">
-          <bannerPaket></bannerPaket>
-        </div>
-      </div> -->
-      <div class="pt-20">
-        <div class="py-20 text-center text-white bg-cyan-800 bg-opacity-80">
-          <h1>{ Banner } </h1>
-          <h1>{ Banner } </h1>
-          <h1>{ Banner } </h1>
-          <h1>{ Banner } </h1>
+      <div class="pt-16 md:pt-20">
+        <div class="text-center text-cyan-800">
+          <kinesis-container>
+            <kinesis-element :strength="150">
+              <img class="md:w-full h-52 md:h-full" src="../../public/banner2.jpg" alt="">
+            </kinesis-element>
+          </kinesis-container>
         </div>
       </div>
-      <div class="bg-orange-50">
-        <gridCompt></gridCompt>
+      <div class="relative -top-36 sm:-top-44 md:-top-56 lg:-top-72 text-center">
+        <div class="text-center font-extrabold text-sm md:text-3xl font-mono text-black px-10 md:px-28">
+          <h1>"Ketika Saya Memandang ke Laut, Saya Tidak Melihat Gelombang, Saya Melihat Rahasia."</h1>
+          <h2 class="pt-2 md:pt-4"> - Kahlil Gibran - </h2>
+        </div>
+      </div>
+      <div class="pb-0 md:pb-10 -mb-5 md:-mb-0 -mt-14 sm:-mt-10 md:-mt-0">
+        <reviewCompt></reviewCompt>
       </div>
     </div>
-    <div class="relative -bottom-full w-full">
-      <div class="pt-10">
+    <div class="relative -bottom-full w-full -mt-12 md:-mt-0">
+      <div class="pt-2 md:pt-10">
         <footerCompt></footerCompt>
       </div>
     </div>
@@ -50,21 +65,25 @@
 </template>
 
 <script>
-// import NavigationComp from '@/components/NavigationComp.vue';
-// import bannerPaket from '@/components/bannerPaket.vue'
 import navCompt from '@/components/navCompt.vue'
 import footerCompt from '@/components/footerCompt.vue'
-import gridCompt from '@/components/gridCompt.vue'
 import specialOffers from '@/components/specialOffers.vue'
+import { KinesisContainer, KinesisElement } from 'vue-kinesis'
+import reviewCompt from "@/components/reviewCompt.vue";
 
 export default {
   name: "HomeView",
   components: {
-    // bannerPaket,
     navCompt,
     footerCompt,
-    gridCompt,
-    specialOffers
+    specialOffers,
+    KinesisContainer,
+    KinesisElement,
+    reviewCompt
   }
 }
 </script>
+
+<style scoped>
+@import "auto-typer-vue3/dist/style.css";
+</style>

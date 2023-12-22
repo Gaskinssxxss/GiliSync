@@ -25,11 +25,20 @@ module.exports = {
         '94': '23.5rem', // Sesuaikan dengan nilai yang diinginkan
       },
       spacing: {
+        '145': '1200px',
+        '135': '980px',
+        '120': '850px',
+        '110': '650px',
         '105': '580px',
         '100': '550px',
         '98': '480px',
         '93': '400px',
-        '90': '360px'
+        '90': '360px',
+        '22': '103px',
+        '2.7': '2.7px',
+      },
+      screens: {
+        '3xl': '1920px'
       },
     },
     plugins: [],

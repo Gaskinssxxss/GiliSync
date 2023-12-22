@@ -9,7 +9,7 @@ const app = express();
 
 // middleware
 if (process.env.NODE_ENV === "development") {
-    app.use(cors({ origin: "http://localhost:8081", credentials: true }));
+    app.use(cors({ origin: "http://192.168.1.9:8080", credentials: true }));
 } else {
     app.use(cors());
 }
@@ -27,6 +27,7 @@ mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology
 const apiRoutes = require("./routes");
 const path = require("path");
 app.use("/api", apiRoutes)
+app.use("/img", express.static(path.join(__dirname, "./public/img")));
 
 // register SPA routes
 app.use(express.static(path.join(__dirname + "/public")));

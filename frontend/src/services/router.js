@@ -5,6 +5,10 @@ import RegisterView from "@/views/RegisterView";
 import store from "@/services/store";
 import UserView from "@/views/UserView";
 import product from "@/views/productViews";
+import admin from "@/views/adminDasboard";
+import payment from "@/views/paymentView";
+import gallery from "@/views/GalleryView"
+import about from "@/views/aboutView"
 
 const routes = [
     {
@@ -56,8 +60,47 @@ const routes = [
             authRequired: false,
             authForbidden: false
         }
+    },
+    {
+        path: "/admin",
+        name: "admin",
+        component: admin,
+        meta: {
+            title: "admin",
+            authRequired: false,
+            authForbidden: false
+        }
+    },
+    {
+        path: "/payment",
+        name: "payment",
+        component: payment,
+        meta: {
+            title: "Payment",
+            authRequired: false,
+            authForbidden: false
+        }
+    },
+    {
+        path: "/gallery",
+        name: "gallery",
+        component: gallery,
+        meta: {
+            title: "Gallery",
+            authRequired: false,
+            authForbidden: false
+        }
+    },
+    {
+        path: "/about",
+        name: "about",
+        component: about,
+        meta: {
+            title: "About",
+            authRequired: false,
+            authForbidden: false
+        }
     }
-
 ]
 
 const router = createRouter({

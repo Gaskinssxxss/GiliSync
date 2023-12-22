@@ -18,7 +18,7 @@ export default {
         month: "long",
         day: "numeric"
       });
-    }
+    },
   },
   computed: {
     user() {

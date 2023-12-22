@@ -1,10 +1,10 @@
 <template>
   <div class="">
-    <div>
-      <NavigationComp />
+    <div class="pb-10">
+      <NavigationComp class="bg-white" />
     </div>
-    <div class="min-h-screen flex items-center justify-center pt-5 bg-orange-50">
-      <div class="bg-orange-50 p-8 rounded shadow-xl border-1 border-cyan-800 w-full sm:w-96">
+    <div class="min-h-screen flex items-center justify-center pt-32 ">
+      <div class=" p-8 rounded shadow-xl bg-white w-full sm:w-96">
         <h1 class="text-2xl font-semibold mb-6">Register</h1>
         <form @submit.prevent="register">
           <div class="mb-4">
@@ -25,14 +25,33 @@
               class="mt-1 p-2 w-full border rounded-md" />
           </div>
 
+          <div class="mb-4">
+            <label for="nama rekening" class="block text-sm font-medium text-gray-600">Nama Rekening</label>
+            <input type="text" v-model="namaRekening" id="password" placeholder="nama" required
+              class="mt-1 p-2 w-full border rounded-md" />
+          </div>
+
+          <div class="mb-4">
+            <label for="Bank" class="block text-sm font-medium text-gray-600">Nama Bank</label>
+            <input type="text" v-model="namaBank" id="password" placeholder="Bank" required
+              class="mt-1 p-2 w-full border rounded-md" />
+          </div>
+
+          <div class="mb-4">
+            <label for="nomor Rekening" class="block text-sm font-medium text-gray-600">Nomor Rekening</label>
+            <input type="text" v-model="nomorRekening" id="password" placeholder="nomor Rekening" required
+              class="mt-1 p-2 w-full border rounded-md" />
+          </div>
+
+
           <button type="submit"
-            class="w-full bg-orange-50 border-1 border-cyan-800 text-cyan-800 p-2 rounded-md hover:bg-cyan-700 hover:text-white transition-all">
+            class="w-full  border-1 border-cyan-800 text-cyan-800 p-2 rounded-md hover:bg-cyan-700 hover:text-white transition-all">
             Register
           </button>
         </form>
       </div>
     </div>
-    <div class="-mt-16">
+    <div class="mt-16">
       <footerCompt></footerCompt>
     </div>
   </div>
@@ -53,7 +72,10 @@ export default {
     return {
       username: "",
       email: "",
-      password: ""
+      password: "",
+      namaRekening: "",
+      namaBank: "",
+      nomorRekening: ""
     }
   },
   methods: {
@@ -61,7 +83,10 @@ export default {
       Api.post("/users/register", {
         username: this.username,
         email: this.email,
-        password: this.password
+        password: this.password,
+        namaRekening: this.namaRekening,
+        namaBank: this.namaBank,
+        nomorRekening: this.nomorRekening
       })
         .then(() => {
           this.$toast.success("Registration succeeded!", { position: "bottom-left", duration: 1000 });

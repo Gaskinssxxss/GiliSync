@@ -1,20 +1,11 @@
 <template>
-    <div class="bg-orange-50">
+    <div class="">
         <div class="">
-            <div class="pb-28">
-                <navCompt class="bg-orange-50"></navCompt>
-            </div>
-            <div class="mr-56 pb-10">
-                <div class="flex items-center justify-end">
-                    <div class="">
-                        <searchCompt>
-
-                        </searchCompt>
-                    </div>
-                </div>
+            <div class=" pb-28">
+                <navCompt class="bg-white"></navCompt>
             </div>
             <div class="">
-                <div class="px-48">
+                <div class="px-2 md:px-4 lg:px-8 xl:px-32">
                     <div class=" bg-opacity-40 rounded-lg">
                         <productCompt></productCompt>
                     </div>
@@ -33,7 +24,7 @@
 import productCompt from '@/components/productCompt.vue';
 import navCompt from "@/components/navCompt.vue";
 import footerCompt from '@/components/footerCompt.vue'
-import searchCompt from '@/components/searchCompt.vue';
+// import searchCompt from '@/components/searchCompt.vue';
 
 export default {
     name: 'productViews',
@@ -41,7 +32,7 @@ export default {
         productCompt,
         navCompt,
         footerCompt,
-        searchCompt
+        // searchCompt
 
     }
 }
