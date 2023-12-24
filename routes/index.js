@@ -1,6 +1,8 @@
 const { Router } = require("express");
 const User = require("../model/user");
 const Product = require("../model/product");
+const ProductTu = require("../model/productTu");
+const ProductTre = require("../model/producTre");
 const Checkout = require("../model/checkout");
 const jwt = require("jsonwebtoken");
 const { SECRET, MAX_AGE } = require("../consts")
@@ -106,6 +108,46 @@ router.get("/product", (req, res) => {
         });
 });
 
+router.get("/products", (req, res) => {
+    ProductTu.find()
+        .then((productLists) => {
+            const formattedData = productLists.map((product) => {
+                return {
+                    imageUrl: product.imageUrl,
+                    name: product.name,
+                    deskripsi: product.deskripsi,
+                    price: product.price
+                };
+            });
+
+            return res.status(200).json({ message: "success", data: formattedData });
+        })
+        .catch((err) => {
+            console.log(err);
+            return res.status(500).json({ message: "error", error: "internal-server-error" });
+        });
+});
+
+router.get("/productsx", (req, res) => {
+    ProductTre.find()
+        .then((productListsx) => {
+            const formattedData = productListsx.map((product) => {
+                return {
+                    imageUrl: product.imageUrl,
+                    name: product.name,
+                    deskripsi: product.deskripsi,
+                    price: product.price
+                };
+            });
+
+            return res.status(200).json({ message: "success", data: formattedData });
+        })
+        .catch((err) => {
+            console.log(err);
+            return res.status(500).json({ message: "error", error: "internal-server-error" });
+        });
+});
+
 /**
  * @route POST api/checkout
  * @desc Checkout product
@@ -117,7 +159,6 @@ router.post('/checkout', requireLogin, async (req, res) => {
     try {
         const checkoutItems = [];
 
-        // Mengumpulkan produk yang di-checkout menjadi satu array
         const checkoutData = selectedProducts.map((product) => {
             const { name, inputValue, price, statusPay } = product;
             return {
@@ -129,7 +170,6 @@ router.post('/checkout', requireLogin, async (req, res) => {
             };
         });
 
-        // Menyimpan semua produk yang di-checkout oleh pengguna ke dalam satu dokumen array
         const newCheckout = new Checkout({
             username: nama,
             checkoutItems: checkoutData,
@@ -184,7 +224,6 @@ router.get('/admin', requireLogin, requireAdmin, async (req, res) => {
     }
 });
 
-// Update checkout status by ID
 router.post('/checkout/:id/update-status', requireLogin, requireAdmin, async (req, res) => {
     const { id } = req.params;
     const { status } = req.body;
@@ -203,9 +242,8 @@ router.post('/checkout/:id/update-status', requireLogin, requireAdmin, async (re
     }
 });
 
-// Mendapatkan status checkout berdasarkan pengguna yang masuk
 router.get('/user/checkout/status', requireLogin, async (req, res) => {
-    const loggedInUsername = req.user.username; // Ambil username dari pengguna yang masuk
+    const loggedInUsername = req.user.username;
 
     try {
         const checkoutStatus = await Checkout.findOne({ username: loggedInUsername }).select('status');

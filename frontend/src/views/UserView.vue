@@ -1,14 +1,33 @@
 <template>
   <div class="view-body">
-    <h1>User</h1>
-    <span><i class="fa fa-user"></i>{{ user.username }}</span>
-    <span><i class="fa fa-at"></i>{{ user.email }}</span>
-    <span><i class="fa fa-calendar"></i>{{ parseDate(user.registrationDate) }}</span>
+    <div>
+      <navCompt class="">
+
+      </navCompt>
+    </div>
+    <div>
+      <user>
+
+      </user>
+    </div>
+    <div>
+      <footerCompt>
+
+      </footerCompt>
+    </div>
   </div>
 </template>
 
 <script>
+import user from "@/components/userCompt.vue"
+import navCompt from "@/components/navCompt.vue";
+import footerCompt from "@/components/footerCompt.vue";
 export default {
+  components: {
+    user,
+    navCompt,
+    footerCompt
+  },
   name: "UserView",
   methods: {
     parseDate(date) {

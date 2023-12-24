@@ -19,6 +19,12 @@
               class="mt-1 p-2 w-full border rounded-md" />
           </div>
 
+          <router-link to="/forgotPassword">
+            <div class="pt-2 pb-4">
+              <h1 class="text-cyan-700 hover:text-cyan-500">Lupa Password?</h1>
+            </div>
+          </router-link>
+
           <button type="submit"
             class="w-full  border-1 border-cyan-800 text-cyan-800 p-2 rounded-md hover:bg-cyan-700 hover:text-white transition-all">
             Login

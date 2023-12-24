@@ -41,12 +41,12 @@ let text3 = ['Special offers - Get % for many package!', 'Selami lautan, tunggan
         <div class="text-center text-cyan-800">
           <kinesis-container>
             <kinesis-element :strength="150">
-              <img class="md:w-full h-52 md:h-full" src="../../public/banner2.jpg" alt="">
+              <img class="w-full h-52 md:h-full" src="../../public/banner2.jpg" alt="">
             </kinesis-element>
           </kinesis-container>
         </div>
       </div>
-      <div class="relative -top-36 sm:-top-44 md:-top-56 lg:-top-72 text-center">
+      <div class="relative -top-36 sm:-top-32 md:-top-56 lg:-top-72 text-center">
         <div class="text-center font-extrabold text-sm md:text-3xl font-mono text-black px-10 md:px-28">
           <h1>"Ketika Saya Memandang ke Laut, Saya Tidak Melihat Gelombang, Saya Melihat Rahasia."</h1>
           <h2 class="pt-2 md:pt-4"> - Kahlil Gibran - </h2>

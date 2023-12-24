@@ -45,7 +45,7 @@
                     </div>
                 </div>
             </div>
-            <button @click="toggleMenu" type="button"
+            <button @click="toggleMenu" @blur="closeMenu" type="button"
                 class="inline-flex items-center justify-center p-2 w-10 h-10 text-sm text-gray-500 rounded-lg hover:text-cyan-500 focus:outline-none focus:ring-2 focus:ring-gray-200  dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden"
                 aria-controls="navbar-hamburger" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
@@ -54,24 +54,47 @@
                         d="M1 1h15M1 7h15M1 13h15" />
                 </svg>
             </button>
-            <div v-show="isMenuOpen" class="absolute top-full w-auto z-10 right-52" id="navbar-hamburger">
-                <div class="-mt-20">
-                    <ul class="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+            <div v-show="isMenuOpen" class="absolute mt-2 w-auto z-10 right-3" id="navbar-hamburger">
+                <div class="mt-52 text-white">
+                    <ul class="flex flex-col font-medium mt-4 rounded-lg px-4 bg-cyan-600 ">
+                        <div>
+                            <router-link to="/">
+                                <button class="pl-2 pt-2 ">
+                                    <h1>home</h1>
+                                </button>
+                            </router-link>
+                        </div>
                         <li>
-                            <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded dark:bg-blue-600"
-                                aria-current="page">Home</a>
+                            <div class="block relative">
+                                <span class="block py-2 px-3 text-white cursor-pointer" @click="toggleDropdowns">
+                                    Produk
+                                </span>
+                                <div v-show="isProdukDropdownOpen" @click="closeMenu"
+                                    class="absolute top-full left-0 mt-2 bg-cyan-800 rounded-lg shadow-lg z-10 text-sm">
+                                    <router-link to="/product">
+                                        <div class="py-2 px-3 cursor-pointer">Tools
+                                        </div>
+                                    </router-link>
+                                    <router-link to="/products">
+                                        <div class="py-2 px-3 cursor-pointer">Lesson
+                                        </div>
+                                    </router-link>
+                                    <router-link to="/produk3">
+                                        <div class="py-2 px-3 cursor-pointer">Guide
+                                        </div>
+                                    </router-link>
+                                </div>
+                            </div>
                         </li>
                         <li>
-                            <a href="#"
-                                class="block py-2 px-3 text-cyan-700 rounded hover:text-cyan-500  dark:hover:bg-gray-700 dark:hover:text-white">Services</a>
+                            <router-link to="/gallery">
+                                <div class="block py-2 px-3 text-white">Gallery</div>
+                            </router-link>
                         </li>
                         <li>
-                            <a href="#"
-                                class="block py-2 px-3 text-cyan-700 rounded hover:text-cyan-500  md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white">Pricing</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block py-2 px-3 text-cyan-700 rounded hover:text-cyan-500  dark:hover:bg-gray-700 dark:hover:text-white">Contact</a>
+                            <router-link to="/about">
+                                <div class="block py-2 px-3 text-white">About</div>
+                            </router-link>
                         </li>
                     </ul>
                 </div>
@@ -88,6 +111,8 @@ export default {
     data() {
         return {
             isDropdownOpen: false,
+            isMenuOpen: false,
+            isProdukDropdownOpen: false
         }
     },
     methods: {
@@ -106,6 +131,16 @@ export default {
         },
         toggleMenu() {
             this.isMenuOpen = !this.isMenuOpen;
+        },
+        toggleProdukDropdown() {
+            this.isProdukDropdownOpen = !this.isProdukDropdownOpen;
+        },
+        toggleDropdowns() {
+            this.isProdukDropdownOpen = !this.isProdukDropdownOpen;
+        },
+        closeMenu() {
+            this.isMenuOpen = false;
+            this.isProdukDropdownOpen = false;
         },
         toggleDropdown() {
             this.isDropdownOpen = !this.isDropdownOpen;

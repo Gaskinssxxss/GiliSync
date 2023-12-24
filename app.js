@@ -6,10 +6,9 @@ const cors = require("cors");
 const cookieParser = require('cookie-parser');
 
 const app = express();
-
 // middleware
 if (process.env.NODE_ENV === "development") {
-    app.use(cors({ origin: "http://192.168.1.9:8080", credentials: true }));
+    app.use(cors({ origin: "http://localhost:8080", credentials: true }));
 } else {
     app.use(cors());
 }

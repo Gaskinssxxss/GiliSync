@@ -7,6 +7,8 @@ const store = createStore({
         userLoggedIn: false,
         isStoreUpdated: false,
         productList: [],
+        productLists: [],
+        productListsx: [],
     },
     mutations: {
         setUser(state, payload) {
@@ -20,6 +22,12 @@ const store = createStore({
         },
         setProductList(state, payload) {
             state.productList = payload;
+        },
+        setProductLists(state, payload) {
+            state.productLists = payload;
+        },
+        setProductListsx(state, payload) {
+            state.productListsx = payload;
         },
     },
     actions: {
@@ -53,6 +61,24 @@ const store = createStore({
             try {
                 const res = await Api.get("/product");
                 context.commit("setProductList", res.data.data);
+            } catch (error) {
+                console.error('Error fetching kursi data in action:', error);
+                throw error;
+            }
+        },
+        async productDatas(context) {
+            try {
+                const res = await Api.get("/products");
+                context.commit("setProductLists", res.data.data);
+            } catch (error) {
+                console.error('Error fetching kursi data in action:', error);
+                throw error;
+            }
+        },
+        async productDatasx(context) {
+            try {
+                const res = await Api.get("/productsx");
+                context.commit("setProductListsx", res.data.data);
             } catch (error) {
                 console.error('Error fetching kursi data in action:', error);
                 throw error;

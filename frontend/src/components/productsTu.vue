@@ -60,7 +60,7 @@
         <form class="pt-16 md:pt-20">
             <div class="px-2 md:px-4">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 xl:gap-8">
-                    <div v-for="product in productList" :key="product.id"
+                    <div v-for="product in productLists" :key="product.id"
                         class="text-xs md:text-base rounded-sm text-center font-sans font-semibold py-2 pb-2 shadow-sm  px-2 bg-white hover:shadow-xl">
                         <div>
                             <div class="pt-4">
@@ -99,9 +99,9 @@ import Api from "@/services/api";
 export default {
     data() {
         return {
-            productList: [],
+            productLists: [],
             open: false,
-            selectedProducts: [], // Array to store selected products
+            selectedProducts: [],
             nama: "",
             total: 0
         };
@@ -120,8 +120,8 @@ export default {
     methods: {
         async fetchProductData() {
             try {
-                const response = await Api.get('product');
-                this.productList = response.data.data.map(product => ({
+                const response = await Api.get('products');
+                this.productLists = response.data.data.map(product => ({
                     ...product,
                     inputValue: 0,
                 }));
@@ -166,7 +166,7 @@ export default {
 
                 if (!existingProduct) {
                     this.selectedProducts.push({ ...product });
-                    product.inputValue = this.productList.price; // Atau atur ke nilai default
+                    product.inputValue = this.productLists.price; // Atau atur ke nilai default
                     this.total += 1;
 
                     localStorage.setItem('selectedProducts', JSON.stringify(this.selectedProducts));

@@ -9,6 +9,8 @@ import admin from "@/views/adminDasboard";
 import payment from "@/views/paymentView";
 import gallery from "@/views/GalleryView"
 import about from "@/views/aboutView"
+import forgotPass from "@/components/forgotPassword"
+import productTu from "@/views/productsView"
 
 const routes = [
     {
@@ -16,7 +18,7 @@ const routes = [
         name: "home",
         component: HomeView,
         meta: {
-            title: "Epic dragons",
+            title: "Gili Sync",
             authRequired: false,
             authForbidden: false
         }
@@ -56,7 +58,7 @@ const routes = [
         name: "product",
         component: product,
         meta: {
-            title: "product",
+            title: "Product",
             authRequired: false,
             authForbidden: false
         }
@@ -66,7 +68,7 @@ const routes = [
         name: "admin",
         component: admin,
         meta: {
-            title: "admin",
+            title: "Admin Dashboard",
             authRequired: false,
             authForbidden: false
         }
@@ -77,7 +79,7 @@ const routes = [
         component: payment,
         meta: {
             title: "Payment",
-            authRequired: false,
+            authRequired: true,
             authForbidden: false
         }
     },
@@ -97,6 +99,26 @@ const routes = [
         component: about,
         meta: {
             title: "About",
+            authRequired: false,
+            authForbidden: false
+        }
+    },
+    {
+        path: "/forgotPassword",
+        name: "forgotPassword",
+        component: forgotPass,
+        meta: {
+            title: "Forgot Password",
+            authRequired: false,
+            authForbidden: false
+        }
+    },
+    {
+        path: "/products",
+        name: "products",
+        component: productTu,
+        meta: {
+            title: "Products",
             authRequired: false,
             authForbidden: false
         }
